@@ -1,14 +1,14 @@
 #pragma once
-#ifndef __WAYPOINT_H__
-#define __WAYPOINT_H__
+#ifndef __GRANADE_H__
+#define __GRANADE_H__
 
 #include "Sprite.h"
 
-class WayPoint final : public Sprite
+class Granade final : public Sprite
 {
 public:
-	WayPoint();
-	~WayPoint();
+	Granade();
+	~Granade();
 
 	// Life Cycle Functions
 	virtual void draw() override;
@@ -16,7 +16,7 @@ public:
 	virtual void clean() override;
 
 private:
-	
+
 };
 
 #endif /* defined (__PLANE__) */

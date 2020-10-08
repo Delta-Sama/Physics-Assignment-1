@@ -29,7 +29,7 @@ void PlayScene::update()
 	m_pSpeedLabel->setText("Speed = " + std::to_string(static_cast<int>(PROMA::getSpeed())) + " m\s");
 
 	m_pTimeRequiredLabel->setText("Time required: " + std::to_string(PROMA::getTime()));
-	m_pCurrentLandPosLabel->setText("Land pos.x: " + std::to_string(static_cast<int>(PROMA::getLandPos())));
+	m_pCurrentLandPosLabel->setText("Land pos.x: " + std::to_string(static_cast<int>(PROMA::getLandPos())) + " m");
 	
 	if (PROMA::getProjectile())
 	{
@@ -91,6 +91,10 @@ void PlayScene::handleEvents()
 void PlayScene::start()
 {
 	// Label
+	m_pBackground = new Background();
+	m_pBackground->getTransform()->position = glm::vec2(0.0f, 0.0f);
+	addChild(m_pBackground);
+	
 	m_pWookiee = new Player();
 	m_pWookiee->getTransform()->position = glm::vec2(Config::START_X, Config::START_Y - m_pWookiee->getHeight()/2);
 	addChild(m_pWookiee);
@@ -98,33 +102,33 @@ void PlayScene::start()
 	m_pEnemies = new Enemy();
 	m_pEnemies->getTransform()->position = glm::vec2(850.0f, Config::START_Y - m_pEnemies->getHeight() / 2);
 	addChild(m_pEnemies);
-	
-	const SDL_Color blue = { 0, 0, 55, 255 };
-	m_pDistanceLabel = new Label("Distance", "Tusj", 30, blue, glm::vec2(260.0f, 40.0f));
+
+	const SDL_Color blue = { 255, 255, 255, 255 };
+	m_pDistanceLabel = new Label("Distance", "Tusj", 30, blue, glm::vec2(160.0f, 40.0f));
 	m_pDistanceLabel->setParent(this);
 	addChild(m_pDistanceLabel);
 
-	m_pAngleToThrowLabel = new Label("Angle", "Tusj", 30, blue, glm::vec2(260.0f, 75.0f));
+	m_pAngleToThrowLabel = new Label("Angle", "Tusj", 30, blue, glm::vec2(160.0f, 75.0f));
 	m_pAngleToThrowLabel->setParent(this);
 	addChild(m_pAngleToThrowLabel);
 
-	m_pSpeedLabel = new Label("Speed", "Tusj", 30, blue, glm::vec2(260.0f, 110.0f));
+	m_pSpeedLabel = new Label("Speed", "Tusj", 30, blue, glm::vec2(160.0f, 110.0f));
 	m_pSpeedLabel->setParent(this);
 	addChild(m_pSpeedLabel);
 
-	m_pProjPositionLabel = new Label("Proj:", "Tusj", 30, blue, glm::vec2(260.0f, 145.0f));
+	m_pProjPositionLabel = new Label("Proj:", "Tusj", 30, blue, glm::vec2(160.0f, 285.0f));
 	m_pProjPositionLabel->setParent(this);
 	addChild(m_pProjPositionLabel);
 
-	m_pTimeRequiredLabel = new Label("Time:", "Tusj", 30, blue, glm::vec2(750.0f, 40.0f));
+	m_pTimeRequiredLabel = new Label("Time:", "Tusj", 30, blue, glm::vec2(750.0f, 20.0f));
 	m_pTimeRequiredLabel->setParent(this);
 	addChild(m_pTimeRequiredLabel);
 
-	m_pCurrentLandPosLabel = new Label("Land x pos:", "Tusj", 30, blue, glm::vec2(750.0f, 75.0f));
+	m_pCurrentLandPosLabel = new Label("Land x pos:", "Tusj", 30, blue, glm::vec2(750.0f, 95.0f));
 	m_pCurrentLandPosLabel->setParent(this);
 	addChild(m_pCurrentLandPosLabel);
 
-	const SDL_Color light_blue = { 60, 60, 255, 255 };
+	const SDL_Color light_blue = { 220, 220, 255, 255 };
 	m_pInstuctionsLabel0 = new Label("R - reset", "Tusj", 30, light_blue, glm::vec2(750.0f, 140.0f));
 	m_pInstuctionsLabel0->setParent(this);
 	addChild(m_pInstuctionsLabel0);

@@ -144,6 +144,12 @@
     <ClCompile Include="..\src\WayPoint.cpp">
       <Filter>Game Objects\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Background.cpp">
+      <Filter>UI Objects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Granade.cpp">
+      <Filter>Game Objects\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\GameObjectType.h">
@@ -261,6 +267,12 @@
       <Filter>Managers\Header</Filter>
     </ClInclude>
     <ClInclude Include="..\src\WayPoint.h">
+      <Filter>Game Objects\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Background.h">
+      <Filter>UI Objects\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Granade.h">
       <Filter>Game Objects\Header</Filter>
     </ClInclude>
   </ItemGroup>

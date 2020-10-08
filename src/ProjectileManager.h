@@ -3,7 +3,7 @@
 #define __PROJECTILE_MANAGER_H__
 #include <GLM/detail/type_vec2.hpp>
 
-#include "WayPoint.h"
+#include "Granade.h"
 
 class ProjectileManager
 {
@@ -21,7 +21,7 @@ public:
 	static void update();
 	static void reset();
 
-	static WayPoint* getProjectile() { return m_projectile; }
+	static Granade* getProjectile() { return m_projectile; }
 
 	static glm::vec2 calculatePositionWithTime(float time);
 	static float calculateTime();
@@ -45,7 +45,7 @@ private:
 	static float m_time;
 	static float m_curtime;
 
-	static WayPoint* m_projectile;
+	static Granade* m_projectile;
 };
 
 typedef ProjectileManager PROMA;

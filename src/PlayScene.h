@@ -2,6 +2,7 @@
 #ifndef __PLAY_SCENE__
 #define __PLAY_SCENE__
 
+#include "Background.h"
 #include "Scene.h"
 #include "WayPoint.h"
 #include "Player.h"
@@ -25,6 +26,7 @@ private:
 
 	Player* m_pWookiee;
 	Enemy* m_pEnemies;
+	Background* m_pBackground;
 	
 	Label* m_pDistanceLabel;
 	Label* m_pAngleToThrowLabel;

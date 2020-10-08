@@ -5,6 +5,7 @@
 
 #include "Config.h"
 #include "EventManager.h"
+#include "WayPoint.h"
 
 float PROMA::m_time = 0.0f;
 float PROMA::m_curtime = 0.0f;
@@ -14,7 +15,7 @@ float PROMA::m_angle = Config::START_ANGLE;
 float PROMA::m_distance = Config::START_DISTANCE;
 bool PROMA::m_simulation = false;
 
-WayPoint* PROMA::m_projectile = nullptr;
+Granade* PROMA::m_projectile = nullptr;
 
 ProjectileManager::ProjectileManager() {}
 
@@ -29,7 +30,7 @@ void ProjectileManager::launchSimulation()
 		m_time = calculateTime();
 		m_curtime = 0.0f;
 
-		m_projectile = new WayPoint();
+		m_projectile = new Granade();
 	}
 }
 
