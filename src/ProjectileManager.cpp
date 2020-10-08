@@ -75,6 +75,7 @@ void ProjectileManager::update()
 
 			m_projectile->getTransform()->position = { Config::START_X + pos.x * Config::MET_TO_PIX,
 				Config::START_Y - pos.y * Config::MET_TO_PIX };
+			m_projectile->getTransform()->rotation.x += 0.1;
 			m_projectile->draw();
 		}
 		else

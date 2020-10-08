@@ -80,7 +80,7 @@ void EventManager::clean()
             SDL_GameControllerClose(m_pGameControllers[count]->handle);
 		}
 	}
-
+    //delete m_prevKeyStates;
     m_pGameControllers.clear();
 }
 
@@ -118,13 +118,26 @@ bool EventManager::isKeyUp(const SDL_Scancode key) const
     return false;
 }
 
+bool EventManager::KeyPressed(const SDL_Scancode key)
+{
+    return (m_keyStates[key] > m_prevKeyStates[key]);
+}
+
+bool EventManager::KeyReleased(const SDL_Scancode key)
+{
+    return (m_keyStates[key] < m_prevKeyStates[key]);
+}
+
+
 void EventManager::onKeyDown()
 {
+    //std::memcpy(m_prevKeyStates, m_keyStates, m_numKeys);
     m_keyStates = SDL_GetKeyboardState(nullptr);
 }
 
 void EventManager::onKeyUp()
 {
+    //std::memcpy(m_prevKeyStates, m_keyStates, m_numKeys);
     m_keyStates = SDL_GetKeyboardState(nullptr);
 }
 
@@ -215,6 +228,10 @@ EventManager::EventManager():
     m_keyStates(nullptr), m_mouseWheel(0), m_isActive(true)
 {
 	// initialize mouse position
+    m_keyStates = SDL_GetKeyboardState(&m_numKeys);
+    //m_prevKeyStates = new Uint8();
+    //std::memcpy(m_prevKeyStates, m_keyStates, m_numKeys);
+	
     m_mousePosition = glm::vec2(0.0f, 0.0f);
 	
     // initialize button states for the mouse

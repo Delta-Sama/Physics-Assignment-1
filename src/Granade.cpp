@@ -23,8 +23,9 @@ void Granade::draw()
 	// alias for x and y
 	const auto x = getTransform()->position.x;
 	const auto y = getTransform()->position.y;
-
-	TextureManager::Instance()->draw("granade", x, y, 0, 255, true, SDL_FLIP_NONE, { getWidth(),getHeight() });
+	const float ang = getTransform()->rotation.x;
+	
+	TextureManager::Instance()->draw("granade", x, y, ang, 255, true, SDL_FLIP_NONE, { getWidth(),getHeight() });
 }
 
 void Granade::update()
