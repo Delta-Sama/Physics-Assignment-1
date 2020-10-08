@@ -24,6 +24,8 @@ public:
 private:
 	glm::vec2 m_mousePosition;
 
+	bool m_instructionsEnabled;
+	
 	Player* m_pWookiee;
 	Enemy* m_pEnemies;
 	Background* m_pBackground;
@@ -33,6 +35,7 @@ private:
 	Label*  m_pSpeedLabel;
 	Label* m_pProjPositionLabel;
 
+	Label* m_pShowInstuctionsLabel;
 	std::vector<Label*> m_instructions;
 	
 	Label* m_pTimeRequiredLabel;

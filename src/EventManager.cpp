@@ -13,6 +13,8 @@ void EventManager::update()
 {
 	if(m_isActive)
 	{
+        std::memcpy(m_prevKeyStates, m_keyStates, m_numKeys);
+		
 		for (auto controller : m_pGameControllers)
 		{
 			if(SDL_GameControllerGetAttached(controller->handle))
@@ -80,7 +82,7 @@ void EventManager::clean()
             SDL_GameControllerClose(m_pGameControllers[count]->handle);
 		}
 	}
-    //delete m_prevKeyStates;
+    delete m_prevKeyStates;
     m_pGameControllers.clear();
 }
 
@@ -131,13 +133,11 @@ bool EventManager::KeyReleased(const SDL_Scancode key)
 
 void EventManager::onKeyDown()
 {
-    //std::memcpy(m_prevKeyStates, m_keyStates, m_numKeys);
     m_keyStates = SDL_GetKeyboardState(nullptr);
 }
 
 void EventManager::onKeyUp()
 {
-    //std::memcpy(m_prevKeyStates, m_keyStates, m_numKeys);
     m_keyStates = SDL_GetKeyboardState(nullptr);
 }
 
@@ -229,8 +229,8 @@ EventManager::EventManager():
 {
 	// initialize mouse position
     m_keyStates = SDL_GetKeyboardState(&m_numKeys);
-    //m_prevKeyStates = new Uint8();
-    //std::memcpy(m_prevKeyStates, m_keyStates, m_numKeys);
+    m_prevKeyStates = new Uint8[m_numKeys];
+    std::memcpy(m_prevKeyStates, m_keyStates, m_numKeys);
 	
     m_mousePosition = glm::vec2(0.0f, 0.0f);
 	

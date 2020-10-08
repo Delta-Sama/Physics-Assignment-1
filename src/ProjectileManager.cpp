@@ -13,7 +13,9 @@ float PROMA::m_curtime = 0.0f;
 float PROMA::m_speed = Config::START_SPEED;
 float PROMA::m_angle = Config::START_ANGLE;
 float PROMA::m_distance = Config::START_DISTANCE;
+float PROMA::m_timeVar = 0.0f;
 bool PROMA::m_simulation = false;
+bool PROMA::m_targetLock = false;
 
 Granade* PROMA::m_projectile = nullptr;
 
@@ -36,24 +38,36 @@ void ProjectileManager::launchSimulation()
 
 float ProjectileManager::getTime()
 {
-	return calculateTime();
+	return m_timeVar;
 }
 
 float ProjectileManager::getLandPos()
 {
-	return calculatePositionWithTime(calculateTime()).x;
+	return calculatePositionWithTime(m_timeVar).x;
 }
 
 void ProjectileManager::update()
 {
+	m_timeVar = calculateTime();
+	
 	if (!m_simulation)
 	{
-		const float y = 550.0f - EventManager::Instance().getMousePosition().y;
-		const float x = EventManager::Instance().getMousePosition().x - 40.0f;
+		if (!m_targetLock)
+		{
+			const float y = 550.0f - EventManager::Instance().getMousePosition().y;
+			const float x = EventManager::Instance().getMousePosition().x - 40.0f;
 
-		const float ang = glm::degrees(atan2(y, x));
+			const float ang = glm::degrees(atan2(y, x));
 
-		changeAngle(ang);
+			changeAngle(ang);
+		}
+		else
+		{
+			float sin2ang = (m_distance * -Config::g) / pow(m_speed, 2);
+			const float ang = (abs(sin2ang) > 1 ? -1.0f : glm::degrees(asin(sin2ang)) / 2);
+			
+			changeAngle(ang);
+		}
 
 		const float time = calculateTime();
 

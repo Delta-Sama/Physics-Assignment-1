@@ -17,10 +17,15 @@ void PlayScene::draw()
 	
 	PROMA::update();
 
-	for (Label* label : m_instructions)
+	if (m_instructionsEnabled)
 	{
-		label->draw();
+		for (Label* label : m_instructions)
+		{
+			label->draw();
+		}
 	}
+	else
+		m_pShowInstuctionsLabel->draw();
 }
 
 void PlayScene::update()
@@ -32,6 +37,10 @@ void PlayScene::update()
 
 	m_pDistanceLabel->setText("Distance = " + std::to_string(static_cast<int>(PROMA::getDistance())) + " m");
 	m_pAngleToThrowLabel->setText("Angle = " + std::to_string(PROMA::getAngle()));
+	if (PROMA::getAngle() == 0.0f && PROMA::getDistance() != 0)
+	{
+		m_pAngleToThrowLabel->setText("impossible to reach");
+	}
 	m_pSpeedLabel->setText("Speed = " + std::to_string(static_cast<int>(PROMA::getSpeed())) + " m\s");
 
 	m_pTimeRequiredLabel->setText("Time required: " + std::to_string(PROMA::getTime()) + " s");
@@ -56,6 +65,7 @@ void PlayScene::clean()
 	{
 		delete label;
 	}
+	delete m_pShowInstuctionsLabel;
 	m_instructions.clear();
 }
 
@@ -65,20 +75,20 @@ void PlayScene::handleEvents()
 
 	if (!PROMA::getSimulation())
 	{
-		if (EventManager::Instance().isKeyDown(SDL_SCANCODE_Q))
+		if (EventManager::Instance().isKeyDown(SDL_SCANCODE_A))
 		{
 			PROMA::changeDistance(-Config::CHANGE_DIST);
 		}
-		else if (EventManager::Instance().isKeyDown(SDL_SCANCODE_E))
+		else if (EventManager::Instance().isKeyDown(SDL_SCANCODE_D))
 		{
 			PROMA::changeDistance(Config::CHANGE_DIST);
 		}
 
-		if (EventManager::Instance().isKeyDown(SDL_SCANCODE_F))
+		if (EventManager::Instance().isKeyDown(SDL_SCANCODE_S))
 		{
 			PROMA::changeSpeed(-Config::CHANGE_SPEED);
 		}
-		else if (EventManager::Instance().isKeyDown(SDL_SCANCODE_G))
+		else if (EventManager::Instance().isKeyDown(SDL_SCANCODE_W))
 		{
 			PROMA::changeSpeed(Config::CHANGE_SPEED);
 		}
@@ -86,6 +96,31 @@ void PlayScene::handleEvents()
 		if (EventManager::Instance().getMouseButton(0))
 		{
 			PROMA::launchSimulation();
+		}
+
+		if (EventManager::Instance().KeyPressed(SDL_SCANCODE_H))
+		{
+			m_instructionsEnabled = !m_instructionsEnabled;
+		}
+
+		if (EventManager::Instance().KeyPressed(SDL_SCANCODE_SPACE))
+		{
+			PROMA::setTargetLock(!PROMA::getTargetLock());
+		}
+
+		if (EventManager::Instance().KeyPressed(SDL_SCANCODE_T))
+		{
+			/*PROMA::setTargetLock(true);
+
+			std::cout << "Enter desired speed: ";
+			float temp_speed;
+			std::cin >> temp_speed;
+			PROMA::setSpeed(temp_speed);
+
+			std::cout << "Enter desired distance: ";
+			float temp_dist;
+			std::cin >> temp_dist;
+			PROMA::setDistance(temp_dist);*/
 		}
 	}
 
@@ -102,6 +137,8 @@ void PlayScene::handleEvents()
 
 void PlayScene::start()
 {
+	m_instructionsEnabled = true;
+	
 	// Label
 	m_pBackground = new Background();
 	m_pBackground->getTransform()->position = glm::vec2(0.0f, 0.0f);
@@ -140,12 +177,16 @@ void PlayScene::start()
 	m_pCurrentLandPosLabel->setParent(this);
 	addChild(m_pCurrentLandPosLabel);
 
-	const SDL_Color light_green = { 220, 255, 220, 255 }; // "H - close instructions"
-	std::string instructions[] = { "R - reset" ,"Q|E - change distance","F|G - change speed","Mouse Click - Launch Simulation" };
-	for (int i = 0; i < 4; i++)
+	const SDL_Color light_green = { 220, 255, 220, 255 };
+	std::string instructions[] = { "H - close instructions", "R - reset" ,"A|D - change distance","W|S - change speed",
+		"Mouse Click - Launch Simulation", "SPACE - target lock" };
+	for (int i = 0; i < 6; i++)
 	{
 		Label* m_pInstuctionsLabel = new Label(instructions[i], "Tusj", 30, light_green, glm::vec2(750.0f, 140.0f + 35.0f * i));
 		m_pInstuctionsLabel->setParent(this);
 		m_instructions.push_back(m_pInstuctionsLabel);
 	}
+
+	m_pShowInstuctionsLabel = new Label("H - open instructions", "Tusj", 30, light_green, glm::vec2(750.0f, 140.0f));
+	m_pCurrentLandPosLabel->setParent(this);
 }
