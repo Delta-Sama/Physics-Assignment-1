@@ -19,12 +19,16 @@ public:
 	static const int LIVES = 5;
 
 	static constexpr float g = -9.8f;
+	static const int WAYPOINTS = 15;
+
+	static constexpr float START_X = 50.0f;
+	static constexpr float START_Y = 525.0f;
 	
 	static const int START_POINT = 100;
 	static constexpr float MAX_DIST = 1000.0f;
 	static constexpr float MAX_SPEED = 200.0f;
 	static constexpr float MAX_ANGLE = 90.0f;
-	static constexpr float MIN_ANGLE = -45.0f;
+	static constexpr float MIN_ANGLE = 0.0f;
 	
 	static constexpr float CHANGE_DIST = 5.0f;
 	static constexpr float CHANGE_ANGLE = 5.0f;

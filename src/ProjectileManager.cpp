@@ -26,27 +26,33 @@ void ProjectileManager::update()
 
 	changeAngle(ang);
 
-	for (WayPoint* pWaypoint : m_points)
-	{
-		delete pWaypoint;
-	}
-	m_points.clear();
+	const float time = calculateTime();
 
-	float time = calculateTime();
+	for (int i = 1; i <= Config::WAYPOINTS; i++)
+	{
+		glm::vec2 pos = calculatePositionWithTime((static_cast<float>(i) / Config::WAYPOINTS) * time);
+		WayPoint pWaypoint;
+		pWaypoint.getTransform()->position = { Config::START_X + pos.x * Config::MET_TO_PIX,
+			Config::START_Y - pos.y * Config::MET_TO_PIX };
+		pWaypoint.draw();
+		
+		//m_points.push_back(pWaypoint);
+	}
 	
 }
 
 glm::vec2 ProjectileManager::calculatePositionWithTime(float time)
 {
-	const float x = 0 + m_speed * cos(m_angle);
-	const float y = 0 + m_speed * sin(m_angle) + (Config::g * pow(time,2)) / 2;
+	
+	const float x = 0 + m_speed * cos(glm::radians(m_angle)) * time;
+	const float y = 0 + m_speed * sin(glm::radians(m_angle)) * time + (Config::g * pow(time,2)) / 2;
 	
 	return { x, y };
 }
 
 float ProjectileManager::calculateTime()
 {
-	const float time = (2 * m_speed * sin(m_angle)) / Config::g;
+	const float time = (2 * m_speed * sin(glm::radians(m_angle))) / abs(Config::g);
 	
 	return time;
 }

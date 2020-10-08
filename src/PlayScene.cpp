@@ -14,20 +14,20 @@ PlayScene::~PlayScene()
 void PlayScene::draw()
 {
 	drawDisplayList();
+	PROMA::update();
 }
 
 void PlayScene::update()
 {
 	updateDisplayList();
 
-	m_pEnemies->getTransform()->position = glm::vec2(Config::START_POINT + PROMA::getDistance() * Config::MET_TO_PIX, 520.0f);
+	m_pEnemies->getTransform()->position = glm::vec2(Config::START_POINT + PROMA::getDistance() * Config::MET_TO_PIX,
+		Config::START_Y - m_pEnemies->getHeight() / 2);
 
 	m_pDistanceLabel->setText("Distance = " + std::to_string(PROMA::getDistance()));
 	m_pAngleToThrowLabel->setText("Angle = " + std::to_string(PROMA::getAngle()));
 	m_pSpeedLabel->setText("Current speed = " + std::to_string(PROMA::getSpeed()));
 
-	PROMA::update();
-	
 	//m_pVelx->setText("vel x = " + std::to_string(m_pPlayer->getRigidBody()->velocity.x));
 	//m_pVely->setText("vey x = " + std::to_string(m_pPlayer->getRigidBody()->velocity.y));
 }
@@ -69,11 +69,11 @@ void PlayScene::start()
 {
 	// Label
 	m_pWookiee = new Player();
-	m_pWookiee->getTransform()->position = glm::vec2(50.0f,525.0f);
+	m_pWookiee->getTransform()->position = glm::vec2(Config::START_X, Config::START_Y - m_pWookiee->getHeight()/2);
 	addChild(m_pWookiee);
 
 	m_pEnemies = new Enemy();
-	m_pEnemies->getTransform()->position = glm::vec2(850.0f, 520.0f);
+	m_pEnemies->getTransform()->position = glm::vec2(850.0f, Config::START_Y - m_pEnemies->getHeight() / 2);
 	addChild(m_pEnemies);
 	
 	const SDL_Color blue = { 0, 0, 255, 255 };

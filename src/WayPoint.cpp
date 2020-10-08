@@ -3,10 +3,10 @@
 
 WayPoint::WayPoint()
 {
-	TextureManager::Instance()->load("../Assets/sprites/Circle.png","waypoint");
+	TextureManager::Instance()->load("../Assets/textures/Circle.png","waypoint");
 
-	setWidth(40);
-	setHeight(40);
+	setWidth(5);
+	setHeight(5);
 
 	getTransform()->position = glm::vec2(0.0f, 0.0f);
 	getRigidBody()->velocity = glm::vec2(0.0f, 0.0f);
@@ -23,8 +23,7 @@ void WayPoint::draw()
 	// alias for x and y
 	const auto x = getTransform()->position.x;
 	const auto y = getTransform()->position.y;
-
-
+	std::cout << "pos: " << x << " " << y << " \n";
 	TextureManager::Instance()->draw("waypoint", x, y, 0, 255, true, SDL_FLIP_NONE, { getWidth(),getHeight() });
 }
 
