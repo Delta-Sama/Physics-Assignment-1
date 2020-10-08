@@ -5,8 +5,8 @@
 #include "TextureManager.h"
 #include "Config.h"
 
-const int X_SIZE = 50;
-const int Y_SIZE = 70;
+const int X_SIZE = 25;
+const int Y_SIZE = 35;
 
 Player::Player()
 {

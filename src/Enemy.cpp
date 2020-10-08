@@ -1,8 +1,8 @@
 #include "Enemy.h"
 #include "TextureManager.h"
 
-const int X_SIZE = 90;
-const int Y_SIZE = 90;
+const int X_SIZE = 45;
+const int Y_SIZE = 45;
 
 Enemy::Enemy() {
 	TextureManager::Instance()->load("../Assets/textures/stormtrooper.png", "stormtrooper");

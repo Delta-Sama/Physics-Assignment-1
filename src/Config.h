@@ -17,6 +17,7 @@ public:
 	static const int MINE_NUM = 50;
 	static const int SCORE = 0;
 	static const int LIVES = 5;
+	static const int FPS = 60;
 
 	static constexpr float g = -9.8f;
 	static const int WAYPOINTS = 15;

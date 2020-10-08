@@ -29,12 +29,11 @@ private:
 	Label* m_pDistanceLabel;
 	Label* m_pAngleToThrowLabel;
 	Label*  m_pSpeedLabel;
+	Label* m_pProjPositionLabel;
 	
-	Label* m_pVelx;
-	Label* m_pVely;
+	Label* m_pTimeRequiredLabel;
+	Label* m_pCurrentLandPosLabel;
 	
-	Button* m_pBackButton;
-	Button* m_pNextButton;
 };
 
 #endif /* defined (__PLAY_SCENE__) */

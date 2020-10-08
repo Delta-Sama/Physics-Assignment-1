@@ -1,7 +1,6 @@
 #pragma once
 #ifndef __PROJECTILE_MANAGER_H__
 #define __PROJECTILE_MANAGER_H__
-#include <vector>
 #include <GLM/detail/type_vec2.hpp>
 
 #include "WayPoint.h"
@@ -13,7 +12,15 @@ public:
 	static float getAngle() { return m_angle; }
 	static float getDistance() { return m_distance; }
 
+	static void launchSimulation();
+	static float getTime();
+	static float getLandPos();
+
+	static bool getSimulation() { return m_simulation; }
+	
 	static void update();
+
+	static WayPoint* getProjectile() { return m_projectile; }
 
 	static glm::vec2 calculatePositionWithTime(float time);
 	static float calculateTime();
@@ -27,12 +34,17 @@ private:
 	~ProjectileManager();
 
 	static void changeAngle(float num);
+
+	static bool m_simulation;
 	
 	static float m_speed;
 	static float m_angle;
 	static float m_distance;
 
-	static std::vector<WayPoint*> m_points;
+	static float m_time;
+	static float m_curtime;
+
+	static WayPoint* m_projectile;
 };
 
 typedef ProjectileManager PROMA;
