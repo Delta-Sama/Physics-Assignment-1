@@ -32,16 +32,23 @@ void ProjectileManager::update()
 	}
 	m_points.clear();
 
-	
+	float time = calculateTime();
 	
 }
 
 glm::vec2 ProjectileManager::calculatePositionWithTime(float time)
 {
-	float x = 0 + m_speed * cos(m_angle);
-	float y = 0 + m_speed * sin(m_angle) + (Config::g * pow(time,2)) / 2;
+	const float x = 0 + m_speed * cos(m_angle);
+	const float y = 0 + m_speed * sin(m_angle) + (Config::g * pow(time,2)) / 2;
 	
 	return { x, y };
+}
+
+float ProjectileManager::calculateTime()
+{
+	const float time = (2 * m_speed * sin(m_angle)) / Config::g;
+	
+	return time;
 }
 
 void ProjectileManager::changeSpeed(float num)

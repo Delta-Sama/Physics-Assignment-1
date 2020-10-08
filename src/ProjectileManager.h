@@ -16,6 +16,7 @@ public:
 	static void update();
 
 	static glm::vec2 calculatePositionWithTime(float time);
+	static float calculateTime();
 
 	static void changeSpeed(float num);
 	
