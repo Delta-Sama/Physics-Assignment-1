@@ -9,9 +9,9 @@
 float PROMA::m_time = 0.0f;
 float PROMA::m_curtime = 0.0f;
 
-float PROMA::m_speed = 95.0f;
-float PROMA::m_angle = 15.0f;
-float PROMA::m_distance = 485.0f;
+float PROMA::m_speed = Config::START_SPEED;
+float PROMA::m_angle = Config::START_ANGLE;
+float PROMA::m_distance = Config::START_DISTANCE;
 bool PROMA::m_simulation = false;
 
 WayPoint* PROMA::m_projectile = nullptr;
@@ -84,6 +84,17 @@ void ProjectileManager::update()
 			m_simulation = false;
 		}
 	}
+}
+
+void ProjectileManager::reset()
+{
+	m_speed = Config::START_SPEED;
+	m_distance = Config::START_DISTANCE;
+
+	delete m_projectile;
+	m_projectile = nullptr;
+	
+	m_simulation = false;
 }
 
 glm::vec2 ProjectileManager::calculatePositionWithTime(float time)

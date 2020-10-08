@@ -19,6 +19,7 @@ public:
 	static bool getSimulation() { return m_simulation; }
 	
 	static void update();
+	static void reset();
 
 	static WayPoint* getProjectile() { return m_projectile; }
 

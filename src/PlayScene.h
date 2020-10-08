@@ -30,6 +30,11 @@ private:
 	Label* m_pAngleToThrowLabel;
 	Label*  m_pSpeedLabel;
 	Label* m_pProjPositionLabel;
+
+	Label* m_pInstuctionsLabel0;
+	Label* m_pInstuctionsLabel1;
+	Label* m_pInstuctionsLabel2;
+	Label* m_pInstuctionsLabel3;
 	
 	Label* m_pTimeRequiredLabel;
 	Label* m_pCurrentLandPosLabel;

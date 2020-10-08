@@ -34,6 +34,10 @@ public:
 	static constexpr float CHANGE_DIST = 5.0f;
 	static constexpr float CHANGE_ANGLE = 5.0f;
 	static constexpr float CHANGE_SPEED = 5.0f;
+
+	static constexpr float START_SPEED = 95.0f;
+	static constexpr float START_ANGLE = 15.0f;
+	static constexpr float START_DISTANCE = 485.0f;
 	
 	static constexpr float MET_TO_PIX = (SCREEN_WIDTH - START_POINT) / MAX_DIST;
 	static constexpr float PIX_TO_MET = 1 / MET_TO_PIX;
