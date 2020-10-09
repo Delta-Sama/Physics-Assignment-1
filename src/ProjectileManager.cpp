@@ -36,11 +36,6 @@ void ProjectileManager::launchSimulation()
 	}
 }
 
-float ProjectileManager::getTime()
-{
-	return m_timeVar;
-}
-
 float ProjectileManager::getLandPos()
 {
 	return calculatePositionWithTime(m_timeVar).x;

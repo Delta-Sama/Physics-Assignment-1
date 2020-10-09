@@ -13,10 +13,10 @@ public:
 	static float getSpeed() { return m_speed; }
 	static float getAngle() { return m_angle; }
 	static float getDistance() { return m_distance; }
-
-	static void launchSimulation();
-	static float getTime();
+	static float getTime() { return m_timeVar; }
 	static float getLandPos();
+	
+	static void launchSimulation();
 
 	static bool getSimulation() { return m_simulation; }
 	
